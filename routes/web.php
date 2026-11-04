@@ -8,25 +8,18 @@ Route::get('/', function () {
     return view('dashboard');
 })->name('dashboard');
 
-//route sederhana
-//Route::get('/surat-masuk', function () {
-    //return "HalamanSurat Masuk";
-//})->name("surat-masuk.index");
+// Surat Masuk
+Route::resource('/surat-masuk', SuratMasukController::class)
+    ->parameters(['surat-masuk' => 'id'])
+    ->only([
+        'index', 'create', 'store',
+        'show', 'edit', 'update', 'destroy'
+    ]);
 
-//route dengan parameter
-//Route::get('/surat-masuk/{id}', function ($id) {
-   // return "Detail Surat Masuk dengan ID:" .$id;
-//})->name("surat-masuk.show");
-
-Route::get('/surat-masuk', [SuratMasukController::class, "index"])
-->name("surat-masuk.index");
-
-Route::get('/surat-masuk/{id}', [SuratMasukController::class, "show"])
-->name("surat-masuk.show");
-
-// Route Surat Keluar
-Route::get('/surat-keluar', [SuratKeluarController::class, 'index'])
-    ->name('surat-keluar.index');
-
-Route::get('/surat-keluar/{id}', [SuratKeluarController::class, 'show'])
-    ->name('surat-keluar.show');
+// Surat Keluar
+Route::resource('/surat-keluar', SuratKeluarController::class)
+    ->parameters(['surat-keluar' => 'id'])
+    ->only([
+        'index', 'create', 'store',
+        'show', 'edit', 'update', 'destroy'
+    ]);
